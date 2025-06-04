@@ -28,3 +28,8 @@ Persistent volume: https://registry.terraform.io/providers/hashicorp/kubernetes/
 Kubernetes job with terraform: https://registry.terraform.io/providers/hashicorp/kubernetes/2.29.0/docs/resources/cron_job_v1
 Nginx deploy: https://github.com/hashicorp-education/learn-terraform-deploy-nginx-kubernetes-provider
 Terraform repository deploy: https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
+
+# References
+# PV: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume
+# PVC: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume_claim
+# Job: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/job
