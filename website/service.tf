@@ -1,9 +1,3 @@
-resource "kubernetes_namespace" "website" {
-  metadata {
-    name = "website"
-  }
-}
-
 # Servicio
 resource "kubernetes_service" "nginx" {
   metadata {
