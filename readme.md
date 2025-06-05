@@ -25,11 +25,9 @@ Cluster: https://kind.sigs.k8s.io/docs/user/quick-start/
 
 ## website
 Persistent volume: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume
-Kubernetes job with terraform: https://registry.terraform.io/providers/hashicorp/kubernetes/2.29.0/docs/resources/cron_job_v1
+Job: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/job
+PV: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume
+PVC: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume_claim
 Nginx deploy: https://github.com/hashicorp-education/learn-terraform-deploy-nginx-kubernetes-provider
 Terraform repository deploy: https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
-
-# References
-# PV: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume
-# PVC: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume_claim
-# Job: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/job
+Git event runner: https://alex-karpenko.github.io/git-events-runner/v0.4/intro/quick-start/

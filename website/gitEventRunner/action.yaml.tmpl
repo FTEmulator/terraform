@@ -1,0 +1,30 @@
+apiVersion: git-events-runner.rs/v1alpha1
+kind: Action
+metadata:
+  name: upgrade-controller
+  namespace: website
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: compilador
+              image: node:latest
+              command: ["sh", "-c"]
+              args:
+                - |
+                  rm -rf /app/* /mnt/website/* &&
+                  git clone ${repo_url} /app &&
+                  cd /app &&
+                  npm install &&
+                  npx next build &&
+                  cp -r out/* /mnt/website
+              volumeMounts:
+                - name: website-storage
+                  mountPath: /mnt/website
+          volumes:
+            - name: website-storage
+              persistentVolumeClaim:
+                claimName: website-pvc
+          restartPolicy: Never

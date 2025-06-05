@@ -1,0 +1,19 @@
+apiVersion: git-events-runner.rs/v1alpha1
+kind: ScheduleTrigger
+metadata:
+  name: git-events-runner-trigger-website
+  namespace: website
+spec:
+  sources:
+    kind: GitRepo
+    names:
+      - git-events-runner-repo
+    watchOn:
+      onChangeOnly: true
+      reference:
+        branch: main
+  schedule:
+    interval: 1h
+  action:
+    kind: Action
+    name: upgrade-controller

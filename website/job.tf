@@ -1,4 +1,4 @@
-# Kubernetes job
+# First deploy
 resource "kubernetes_job" "website-downloader" {
   metadata {
     name = "website-downloader"
@@ -15,7 +15,7 @@ resource "kubernetes_job" "website-downloader" {
           image   = "node:latest"
           command = ["sh", "-c"]
           args = [
-            "mkdir -p /app /mnt/website && cd /app && git clone https://github.com/FTEmulator/website.git . && npm install && npx next build && cp -r out/* /mnt/website"
+            "mkdir -p /app /mnt/website && cd /app && git clone ${var.git_repo} . && npm install && npx next build && cp -r out/* /mnt/website"
           ]
           volume_mount {
             mount_path = "/mnt/website"

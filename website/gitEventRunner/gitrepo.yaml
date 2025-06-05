@@ -1,0 +1,9 @@
+apiVersion: git-events-runner.rs/v1alpha1
+kind: GitRepo
+metadata:
+  name: git-events-runner-repo
+  namespace: website
+spec:
+  repoUri: https://github.com/FTEmulator/website.git
+  reference:
+    branch: main
