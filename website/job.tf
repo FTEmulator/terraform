@@ -34,4 +34,8 @@ resource "kubernetes_job" "website-downloader" {
     backoff_limit = 4
   }
   wait_for_completion = true
+
+  timeouts {
+    create = "5m"
+  }
 }
