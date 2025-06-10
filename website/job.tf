@@ -14,8 +14,14 @@ resource "kubernetes_job" "website-downloader" {
           name    = "website-downloader"
           image   = "node:latest"
           command = ["sh", "-c"]
-          args = [
-            "mkdir -p /app /mnt/website && cd /app && git clone ${var.git_repo} . && npm install && npx next build && cp -r out/* /mnt/website"
+          args = [<<EOF
+            mkdir -p /app /mnt/website
+            cd /app && git clone ${var.git_repo} .
+            npm install
+            npx next build
+            cp -r out/* /mnt/website
+            echo "La pagina se descargo correctamente"
+            EOF
           ]
           volume_mount {
             mount_path = "/mnt/website"

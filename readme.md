@@ -31,3 +31,5 @@ PVC: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/re
 Nginx deploy: https://github.com/hashicorp-education/learn-terraform-deploy-nginx-kubernetes-provider
 Terraform repository deploy: https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
 Git event runner: https://alex-karpenko.github.io/git-events-runner/v0.4/intro/quick-start/
+Flux gitRepositorioes: https://fluxcd.io/flux/components/source/gitrepositories/?utm_source=chatgpt.com
+Flux kustomization: fluxcd.io/flux/components/kustomize/kustomizations/?utm_source=chatgpt.com

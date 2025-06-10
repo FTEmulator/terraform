@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: website-gitgepository
+  namespace: website
+spec:
+  interval: 1m
+  url: https://github.com/FTEmulator/website
+  ref:
+    branch: main

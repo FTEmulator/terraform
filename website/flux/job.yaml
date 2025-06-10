@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: website-update-job-$(SOURCE_COMMIT)
+  namespace: website
+spec:
+  ttlSecondsAfterFinished: 40
+  template:
+    spec:
+      restartPolicy: OnFailure
+      initContainers:
+        - name: git-clone
+          image: alpine/git:2.44.0
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              rm -rf /repo/*
+              git clone --depth 1 ${var.git_repo} /repo
+          volumeMounts:
+            - name: repo-volume
+              mountPath: /repo
+      containers:
+        - name: sync
+          image: node:20-alpine
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              rm -rf /mnt/website/*
+              cd /repo
+              npm install
+              npx expo build
+              cp -r out/* /mnt/website
+              echo "La pagina se actualizo correctamente"
+              kubectl delete pod -l app=nginx -n website
+          volumeMounts:
+            - name: website-volume
+              mountPath: /mnt/website
+            - name: repo-volume
+              mountPath: /repo
+      volumes:
+        - name: website-volume
+          persistentVolumeClaim:
+            claimName: nginx-pvc
+        - name: repo-volume
+          emptyDir: {}
+  backoffLimit: 2

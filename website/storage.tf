@@ -7,7 +7,7 @@ resource "kubernetes_persistent_volume" "website_pv" {
     capacity  = {
       storage = "1Gi"
     }
-    access_modes = ["ReadWriteOnce"]
+    access_modes = ["ReadWriteMany"]
     persistent_volume_source {
       host_path {
         path = "/mnt/website"
@@ -25,7 +25,7 @@ resource "kubernetes_persistent_volume_claim" "website_pvc" {
     namespace = kubernetes_namespace.website.metadata[0].name
   }
   spec {
-    access_modes = ["ReadWriteOnce"]
+    access_modes = ["ReadWriteMany"]
     resources {
       requests = {
         storage = "1Gi"
