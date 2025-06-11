@@ -17,19 +17,11 @@ sudo kubernetes init
 
 Desplegamos (hay que poner "yes")
 ```bash
-sudo kubernetes init
+sudo kubernetes apply
 ```
+
+# Documentacion
+Si deseas saber que se crea y como se crea te recomiendo consultar la carpeta /doc, ahi encontraras todo lo necesario.
 
 # Links de referencia
 Cluster: https://kind.sigs.k8s.io/docs/user/quick-start/
-
-## website
-Persistent volume: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume
-Job: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/job
-PV: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume
-PVC: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume_claim
-Nginx deploy: https://github.com/hashicorp-education/learn-terraform-deploy-nginx-kubernetes-provider
-Terraform repository deploy: https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
-Git event runner: https://alex-karpenko.github.io/git-events-runner/v0.4/intro/quick-start/
-Flux gitRepositorioes: https://fluxcd.io/flux/components/source/gitrepositories/?utm_source=chatgpt.com
-Flux kustomization: fluxcd.io/flux/components/kustomize/kustomizations/?utm_source=chatgpt.com
