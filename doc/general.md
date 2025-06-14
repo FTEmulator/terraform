@@ -1,23 +1,6 @@
 # Main.tf
 En main.tf se define el proveedor (Kubernetes) y los módulos que tiene que ejecutar
 
-// # Estructura
-// <pre>
-// ├── kind-config.yaml
-// ├── main.tf
-// └── website
-//         ├── deployment.tf
-//         ├── job.tf
-//         ├── namespace.tf
-//         ├── service.tf
-//         ├── storage.tf
-//         └── variables.tf
-//         └──  flux
-//                 ├── gitRepository.yaml
-//                 ├── job.yaml
-//                 └── kustomization.yaml
-// </pre>
-
 # kind-config.yaml
 Aquí se definen los puertos con los que salen los servicios al exterior del cluster.
 
