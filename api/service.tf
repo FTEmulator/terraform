@@ -6,7 +6,7 @@ resource "kubernetes_service" "api" {
 
     spec {
         selector = {
-            App = "api"
+            app = "api"
         }
         port {
             port = 8080

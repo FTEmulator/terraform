@@ -22,6 +22,7 @@ resource "kubernetes_job" "api-downloader" {
                         chmod +x gradlew
                         ./gradlew bootJar
                         cp -r ./build/libs/*.jar /mnt/app/app.jar
+                        chmod +x /mnt/app/app.jar
                         echo "La api se descargo correctamente"
                         EOF
                     ]

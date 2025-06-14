@@ -47,6 +47,11 @@ resource "kubernetes_deployment" "api" {
                     image = "eclipse-temurin:21-jdk"
                     command = ["java", "-jar", "/mnt/app/app.jar"]
                 
+                    env {
+                        name = "SERVER_PORT"
+                        value = "8080"
+                    }
+
                     port {
                         container_port = 8080
                     }

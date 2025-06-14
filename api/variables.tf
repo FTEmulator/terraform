@@ -7,7 +7,7 @@ variable "api_version" {
 variable "node_port" {
   description = "Puerto NodePort para exponer el servicio de la api"
   type        = number
-  default     = 30001
+  default     = 30000
 }
 
 variable "nodeVersion" {
