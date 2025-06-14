@@ -7,15 +7,15 @@ En main.tf se define el proveedor (Kubernetes) y los módulos que tiene que ejec
 ├── main.tf
 └── website
         ├── deployment.tf
-        ├── flux│
-                ├── gitRepository.yaml │
-                ├── job.yaml │
-                └── kustomization.yaml
         ├── job.tf
         ├── namespace.tf
         ├── service.tf
         ├── storage.tf
         └── variables.tf
+        └──  flux
+                ├── gitRepository.yaml
+                ├── job.yaml
+                └── kustomization.yaml
 </pre>
 
 # kind-config.yaml
