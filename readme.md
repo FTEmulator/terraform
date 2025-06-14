@@ -7,6 +7,16 @@ Con kinf-config.yaml crearemos el cluster:
 sudo kind create cluster --config kind-config.yaml
 ```
 
+# Dependencias
+Flux
+```bash
+curl -s https://fluxcd.io/install.sh | sudo bash
+```
+
+```bash
+flux install
+```
+
 # Despliege de terraform
 A continuación desplegaremos toda la infraestructura:
 

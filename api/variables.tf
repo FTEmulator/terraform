@@ -1,23 +1,23 @@
-variable "nginx_version" {
+variable "api_version" {
   description = "Versión de Nginx a utilizar"
   type        = string
   default     = "latest"
 }
 
 variable "node_port" {
-  description = "Puerto NodePort para exponer el servicio de Nginx"
+  description = "Puerto NodePort para exponer el servicio de la api"
   type        = number
-  default     = 31234
+  default     = 30001
 }
 
 variable "nodeVersion" {
-  description = "Puerto NodePort para exponer el servicio de Nginx"
+  description = "Version de gradle"
   type        = string
-  default     = "latest"
+  default     = "8.7.0-jdk21"
 }
 
 variable "git_repo" {
   description = "Repositorio de github"
   type = string
-  default = "https://github.com/FTEmulator/website.git"
+  default = "https://github.com/FTEmulator/FTEmulator-api.git"
 }

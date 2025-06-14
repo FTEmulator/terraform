@@ -17,5 +17,10 @@ En main.tf se define el proveedor (kubernetes) y los modulos que tiene que ejecu
     ├── terraform.tfstate
     └── variables.tf
 
+# kind-config.yaml
+Aqui se definen los puertos con los que salen los servicios al exterior del cluster.
+
+- ref: 
+
 # ./website
 Esta carpeta tiene todo lo necesario para desplegar la pagina web y al mismo tiempo actualizarla siempre a la ultima version del repositorio de la web.

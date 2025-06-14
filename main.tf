@@ -16,3 +16,8 @@ resource "kubernetes_manifest" "gitRepository" {
 resource "kubernetes_manifest" "kustomization" {
   manifest = yamldecode(file("${path.module}/website/flux/kustomization.yaml"))
 }
+
+# Api
+module "api" {
+  source = "./api"
+}
