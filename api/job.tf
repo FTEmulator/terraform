@@ -16,19 +16,20 @@ resource "kubernetes_job" "api-downloader" {
                     image = "gradle:${var.nodeVersion}"
                     command = ["sh", "-c"]
                     args = [<<EOF
-                        mkdir -p /app /mnt/app
+                        mkdir -p /app /mnt/api
                         cd /app
                         git clone ${var.git_repo} .
                         chmod +x gradlew
                         ./gradlew bootJar
-                        cp -r ./build/libs/*.jar /mnt/app/app.jar
-                        chmod +x /mnt/app/app.jar
+                        cp -r ./build/libs/*.jar /mnt/api/app.jar
+                        chmod +x /mnt/api/app.jar
+                        kubectl -n api rollout restart deployment api
                         echo "La api se descargo correctamente"
                         EOF
                     ]
 
                     volume_mount {
-                        mount_path = "/mnt/app"
+                        mount_path = "/mnt/api"
                         name = "api-storage"
                     }
                 }

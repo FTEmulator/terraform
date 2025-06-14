@@ -30,7 +30,7 @@ resource "kubernetes_deployment" "api" {
                     image = "busybox"
                     command = ["sh", "-c"]
                     args = [<<EOF
-                        while [ ! -f /mnt/app/app.jar ]; do
+                        while [ ! -f /mnt/api/app.jar ]; do
                             echo "Esperando el jar de la api..."
                             sleep 5
                         done
@@ -38,14 +38,14 @@ resource "kubernetes_deployment" "api" {
                     ]
 
                     volume_mount {
-                        mount_path = "/mnt/app"
+                        mount_path = "/mnt/api"
                         name       = "api-storage"
                     } 
                 }
                 container {
                     name = "api"
                     image = "eclipse-temurin:21-jdk"
-                    command = ["java", "-jar", "/mnt/app/app.jar"]
+                    command = ["java", "-jar", "/mnt/api/app.jar"]
                 
                     env {
                         name = "SERVER_PORT"
@@ -68,7 +68,7 @@ resource "kubernetes_deployment" "api" {
                     }
 
                     volume_mount {
-                        mount_path = "/mnt/app"
+                        mount_path = "/mnt/api"
                         name       = "api-storage"
                     } 
                 }

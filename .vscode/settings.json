@@ -1,13 +1,23 @@
 {
     "cSpell.words": [
         "enrutamiento",
+        "fluxcd",
+        "gitrepository",
+        "interval",
         "kind",
+        "kube",
+        "kubernetes",
         "kustomizarion",
         "kustomization",
+        "kustomize",
+        "main",
         "nginx",
         "Persistent",
         "pods",
+        "prune",
         "terraform",
-        "tfstate"
+        "tfstate",
+        "timeout",
+        "toolkit"
     ]
 }

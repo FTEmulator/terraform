@@ -10,7 +10,7 @@ resource "kubernetes_persistent_volume" "api_pv" {
         access_modes = ["ReadWriteMany"]
         persistent_volume_source {
             host_path {
-                path = "/mnt/app"
+                path = "/mnt/api"
             }
         }
         persistent_volume_reclaim_policy = "Delete"

@@ -9,15 +9,24 @@ module "website" {
 }
 
 ## Flux
-resource "kubernetes_manifest" "gitRepository" {
+resource "kubernetes_manifest" "website_gitRepository" {
   manifest = yamldecode(file("${path.module}/website/flux/gitRepository.yaml"))
 }
 
-resource "kubernetes_manifest" "kustomization" {
+resource "kubernetes_manifest" "website_kustomization" {
   manifest = yamldecode(file("${path.module}/website/flux/kustomization.yaml"))
 }
 
 # Api
 module "api" {
   source = "./api"
+}
+
+## Flux
+resource "kubernetes_manifest" "api_gitRepository" {
+  manifest = yamldecode(file("${path.module}/api/flux/gitRepository.yaml"))
+}
+
+resource "kubernetes_manifest" "api_kustomization" {
+  manifest = yamldecode(file("${path.module}/api/flux/kustomization.yaml"))
 }
