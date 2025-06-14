@@ -3,7 +3,7 @@ resource "kubernetes_deployment" "nginx" {
     name      = "nginx"
     namespace = kubernetes_namespace.website.metadata[0].name
     labels = {
-      App = "nginx"
+      app = "nginx"
     }
   }
 
@@ -11,13 +11,13 @@ resource "kubernetes_deployment" "nginx" {
     replicas = 1
     selector {
       match_labels = {
-        App = "nginx"
+        app = "nginx"
       }
     }
     template {
       metadata {
         labels = {
-          App = "nginx"
+          app = "nginx"
         }
       }
       spec {
