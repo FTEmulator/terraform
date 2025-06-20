@@ -1,5 +1,5 @@
 variable "api_version" {
-  description = "Versión de Nginx a utilizar"
+  description = "Versión de jdk a utilizar"
   type        = string
   default     = "latest"
 }
