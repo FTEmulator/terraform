@@ -1,7 +1,7 @@
-resource "kubernetes_job" "api-downloader" {
+resource "kubernetes_job" "auth-downloader" {
     metadata {
-        name = "api-downloader"
-        namespace = kubernetes_namespace.api.metadata[0].name
+        name = "auth-downloader"
+        namespace = kubernetes_namespace.auth.metadata[0].name
     }
 
     spec {
@@ -12,33 +12,32 @@ resource "kubernetes_job" "api-downloader" {
                 restart_policy = "Never"
 
                 container {
-                    name = "api-downloader"
+                    name = "auth-downloader"
                     image = "gradle:${var.nodeVersion}"
                     command = ["sh", "-c"]
                     args = [<<EOF
-                        mkdir -p /app /mnt/api
+                        mkdir - p /app /mnt/auth
                         cd /app
                         git clone ${var.git_repo} .
                         chmod +x gradlew
                         ./gradlew bootJar
-                        cp -r ./build/libs/*.jar /mnt/api/app.jar
-                        chmod +x /mnt/api/app.jar
-                        kubectl -n api rollout restart deployment api
+                        cp -r ./build/libs/*.jar /mnt/auth/app.jar
+                        chmod +x /mnt/auth/app.jar
                         echo "La api se descargo correctamente"
                     EOF
                     ]
 
                     volume_mount {
-                        mount_path = "/mnt/api"
-                        name = "api-storage"
+                        mount_path = "/mnt/auth"
+                        name = "auth-storage"
                     }
                 }
 
                 volume {
-                    name = "api-storage"
+                    name = "auth-storage"
 
                     persistent_volume_claim {
-                        claim_name = kubernetes_persistent_volume_claim.api_pvc.metadata[0].name
+                        claim_name = kubernetes_persistent_volume_claim.auth_pvc.metadata[0].name
                     }
                 }
             }

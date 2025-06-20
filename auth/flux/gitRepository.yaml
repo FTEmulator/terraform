@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: auth-gitrepository
+  namespace: auth
+spec:
+  interval: 1m
+  url: https://github.com/FTEmulator/auth
+  ref:
+    branch: main
