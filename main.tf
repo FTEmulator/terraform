@@ -30,3 +30,17 @@ resource "kubernetes_manifest" "api_gitRepository" {
 resource "kubernetes_manifest" "api_kustomization" {
   manifest = yamldecode(file("${path.module}/api/flux/kustomization.yaml"))
 }
+
+# Auth
+module "api" {
+  source = "./auth"
+}
+
+## Flux
+resource "kubernetes_manifest" "api_gitRepository" {
+  manifest = yamldecode(file("${path.module}/auth/flux/gitRepository.yaml"))
+}
+
+resource "kubernetes_manifest" "api_kustomization" {
+  manifest = yamldecode(file("${path.module}/auth/flux/kustomization.yaml"))
+}
