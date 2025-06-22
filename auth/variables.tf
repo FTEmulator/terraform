@@ -10,6 +10,12 @@ variable "node_port" {
     default     = 30002
 }
 
+variable "redis_port" {
+  description = "Puerto NodePort para exponer el servicio de redis"
+  type        = number
+  default     = 6379
+}
+
 variable "nodeVersion" {
   description = "Version de gradle"
   type        = string
