@@ -13,7 +13,7 @@ resource "kubernetes_job" "auth-downloader" {
 
                 container {
                     name = "auth-downloader"
-                    image = "gradle:${var.nodeVersion}"
+                    image = "gradle:${var.jdkVersion}"
                     command = ["sh", "-c"]
                     args = [<<EOF
                         mkdir - p /app /mnt/auth
@@ -49,6 +49,6 @@ resource "kubernetes_job" "auth-downloader" {
     wait_for_completion = true
 
     timeouts {
-        create = "5m"
+        create = "10m"
     }
 }

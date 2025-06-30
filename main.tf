@@ -44,3 +44,17 @@ resource "kubernetes_manifest" "auth_gitRepository" {
 resource "kubernetes_manifest" "auth_kustomization" {
   manifest = yamldecode(file("${path.module}/auth/flux/kustomization.yaml"))
 }
+
+# Profile
+module "profile" {
+  source = "./profile"
+}
+
+## Flux
+resource "kubernetes_manifest" "profile_gitRepository" {
+  manifest = yamldecode(file("${path.module}/profile/flux/gitRepository.yaml"))
+}
+
+resource "kubernetes_manifest" "profile_kustomization" {
+  manifest = yamldecode(file("${path.module}/profile/flux/kustomization.yaml"))
+}

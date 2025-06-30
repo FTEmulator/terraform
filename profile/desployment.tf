@@ -1,56 +1,60 @@
-resource "kubernetes_deployment" "auth" {
+# Random parword generator
+resource "random_password" "password" {
+    length           = 16
+    special          = true
+    override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+# Deployment
+resource "kubernetes_deployment" "profile" {
     metadata {
-        name = "auth"
-        namespace = kubernetes_namespace.auth.metadata[0].name
+        name = "profile"
+        namespace = kubernetes_namespace.profile.metadata[0].name
         labels = {
-            app = "auth"
+            app = "profile"
         }
     }
-
-    depends_on = [
-        kubernetes_job.auth-downloader
-    ]
 
     spec {
         replicas = 1
         selector {
             match_labels = {
-                app = "auth"
+                app = "profile"
             }
         }
 
         template {
             metadata {
                 labels = {
-                    app = "auth"
+                    app = "profile"
                 }
             }
-            
+
             spec {
                 init_container {
                     name = "wait-jar"
                     image = "busybox"
                     command = ["sh", "-c"]
                     args = [<<EOF
-                        while [ ! -f /mnt/auth/app.jar ]; do
-                            echo "Esperando el jar de auth..."
+                        while [ ! -f /mnt/profile/app.jar ]; do
+                            echo "Esperando el jar de profile..."
                             sleep 5
                         done
                     EOF
                     ]
 
                     volume_mount {
-                        mount_path = "/mnt/auth"
-                        name = "auth-storage"
+                        mount_path = "/mnt/profile"
+                        name = "profile-storage"
                     }
                 }
 
                 container {
-                    name = "auth"
-                    image = "eclipse-temurin:21-jdk"
-                    command = ["java", "-jar", "/mnt/auth/app.jar"]
-
-                    port {
+                    name = "profile"
+                    image = var.deployVersion
+                    command = ["java", "-jar", "/mnt/profile/app.jar"]
+                
+                    port  {
                         container_port = var.jdk_port
                     }
 
@@ -66,15 +70,15 @@ resource "kubernetes_deployment" "auth" {
                     }
 
                     volume_mount {
-                        mount_path = "/mnt/auth"
-                        name = "auth-storage"
+                        mount_path = "/mnt/profile"
+                        name = "profile-storage"
                     }
                 }
 
                 volume {
-                    name = "auth-storage"
+                    name = "profile-storage"
                     persistent_volume_claim {
-                        claim_name = kubernetes_persistent_volume_claim.auth_pvc.metadata[0].name
+                        claim_name = kubernetes_persistent_volume_claim.profile_pvc.metadata[0].name
                     }
                 }
             }

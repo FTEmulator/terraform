@@ -1,8 +1,7 @@
-# Persistent volume
-
-resource "kubernetes_persistent_volume" "auth_pv" {
+#  Persistent volume
+resource "kubernetes_persistent_volume" "profile_pv" {
     metadata {
-        name = "auth-pv"
+        name = "profile-pv"
     }
 
     spec {
@@ -11,10 +10,10 @@ resource "kubernetes_persistent_volume" "auth_pv" {
         }
 
         access_modes = ["ReadWriteMany"]
-        
+
         persistent_volume_source {
             host_path {
-                path = "/mnt/auth"
+                path = "/mnt/profile"
             }
         }
 
@@ -24,10 +23,10 @@ resource "kubernetes_persistent_volume" "auth_pv" {
 }
 
 # Persistent volume claim
-resource "kubernetes_persistent_volume_claim" "auth_pvc" {
+resource "kubernetes_persistent_volume_claim" "profile_pvc" {
     metadata {
-        name = "auth-pvc"
-        namespace = kubernetes_namespace.auth.metadata[0].name
+        name = "profile-pvc"
+        namespace = kubernetes_namespace.profile.metadata[0].name
     }
 
     spec {
@@ -38,7 +37,7 @@ resource "kubernetes_persistent_volume_claim" "auth_pvc" {
             }
         }
 
-        volume_name = kubernetes_persistent_volume.auth_pv.metadata[0].name
+        volume_name = kubernetes_persistent_volume.profile_pv.metadata[0].name
         storage_class_name = "manual"
     }
 }
