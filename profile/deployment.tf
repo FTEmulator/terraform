@@ -1,11 +1,3 @@
-# Random parword generator
-resource "random_password" "password" {
-    length           = 16
-    special          = true
-    override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
-# Deployment
 resource "kubernetes_deployment" "profile" {
     metadata {
         name = "profile"
@@ -58,6 +50,26 @@ resource "kubernetes_deployment" "profile" {
                         container_port = var.jdk_port
                     }
 
+                    env {
+                        name = "POSTGRES_USER"
+                        value_from {
+                            secret_key_ref {
+                                name = kubernetes_secret.postgres_credentials.metadata[0].name
+                                key = "username"
+                            }
+                        }
+                    }
+
+                    env {
+                        name = "POSTGRES_PASSWORD"
+                        value_from {
+                            secret_key_ref {
+                                name = kubernetes_secret.postgres_credentials.metadata[0].name
+                                key = "password"
+                            }
+                        }
+                    }
+
                     resources {
                         limits = {
                             cpu    = "500m"
@@ -68,7 +80,6 @@ resource "kubernetes_deployment" "profile" {
                             memory = "512Mi"
                         }
                     }
-
                     volume_mount {
                         mount_path = "/mnt/profile"
                         name = "profile-storage"

@@ -20,3 +20,22 @@ resource "kubernetes_service" "profile" {
 }
 
 # Profile postgres service
+resource "kubernetes_service" "postgres" {
+    metadata {
+        name = "postgres-service"
+        namespace = kubernetes_namespace.profile.metadata[0].name
+    }
+
+    spec {
+        selector = {
+            app = "postgres"
+        }
+
+        port {
+            port = var.postgres_port
+            target_port = var.postgres_port
+        }
+
+        type = "ClusterIP"
+    }
+}

@@ -49,6 +49,6 @@ resource "kubernetes_job" "profile-downloader" {
     wait_for_completion = true
 
     timeouts {
-        create = "10m"
+        create = "20m"
     }
 }

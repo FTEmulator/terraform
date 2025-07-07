@@ -48,6 +48,6 @@ resource "kubernetes_job" "website-downloader" {
   wait_for_completion = true
 
   timeouts {
-    create = "5m"
+    create = "20m"
   }
 }
