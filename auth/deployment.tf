@@ -51,7 +51,7 @@ resource "kubernetes_deployment" "auth" {
                     command = ["java", "-jar", "/mnt/auth/app.jar"]
 
                     port {
-                        container_port = 30002
+                        container_port = var.jdk_port
                     }
 
                     resources {

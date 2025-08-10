@@ -9,7 +9,9 @@ resource "kubernetes_persistent_volume" "auth_pv" {
         capacity = {
             storage = "1Gi"
         }
+
         access_modes = ["ReadWriteMany"]
+        
         persistent_volume_source {
             host_path {
                 path = "/mnt/auth"

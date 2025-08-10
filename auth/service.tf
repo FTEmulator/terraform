@@ -1,4 +1,4 @@
-// Auth api service
+# Auth api service
 resource "kubernetes_service" "auth" {
     metadata {
         name = "auth-service"
@@ -11,15 +11,15 @@ resource "kubernetes_service" "auth" {
         }
 
         port {
-            port = var.node_port
-            target_port = var.node_port
+            port = var.jdk_port
+            target_port = var.jdk_port
         }
 
         type = "ClusterIP"
     }
 }
 
-// Auth redis service
+# Auth redis service
 resource "kubernetes_service" "redis" {
     metadata {
         name = "redis-service"
