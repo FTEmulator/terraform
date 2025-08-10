@@ -18,9 +18,10 @@ resource "kubernetes_job" "website-downloader" {
           args = [<<EOF
             mkdir -p /app /mnt/website
             cd /app
-            git clone ${var.git_repo} .
-            npm install
-            npx next build
+            git clone --no-checkout ${var.git_repo} .
+            git sparse-checkout init --cone
+            git sparse-checkout set out
+            git checkout main
             cp -r out/* /mnt/website
             echo "La pagina se descargo correctamente"
             EOF
