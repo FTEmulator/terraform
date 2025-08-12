@@ -57,7 +57,12 @@ resource "kubernetes_deployment" "profile" {
 
                     env {
                         name = "POSTGRES_PASSWORD"
-                        value = "Almi123"
+                        value_from {
+                            secret_key_ref {
+                            name = kubernetes_secret.postgres_credentials.metadata[0].name
+                            key  = "password"
+                            }
+                        }
                     }
 
                     resources {
