@@ -25,7 +25,6 @@ resource "kubernetes_deployment" "postgres" {
       }
 
       spec {
-        # InitContainer para generar el SQL dinámico
         init_container {
           name  = "generate-init-sql"
           image = "alpine"
@@ -106,7 +105,6 @@ resource "kubernetes_deployment" "postgres" {
           }
         }
 
-        # Volumen compartido ya definido arriba
         volume {
           name = "init-sql"
           empty_dir {}
