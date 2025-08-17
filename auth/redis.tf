@@ -29,6 +29,26 @@ resource "kubernetes_deployment" "redis" {
                     port {
                         container_port = 6379
                     }
+
+                    command = [
+                        "redis-server",
+                        "--save", "300", "5",
+                        "--appendonly", "yes"
+                    ]
+
+                    volume_mount {
+                        name       = "auth-storage"
+                        mount_path = "/data"
+                        sub_path   = "redisstorage"
+                    }
+                }
+
+                volume {
+                    name = "auth-storage"
+                    host_path {
+                        path = "/mnt/auth"
+                        type = "DirectoryOrCreate"
+                    }
                 }
             }
         }

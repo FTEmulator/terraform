@@ -8,12 +8,6 @@ module "website" {
   source = "./website"
 }
 
-# resource "kubernetes_namespace" "website" {
-#   metadata {
-#     name = "website"
-#   }
-# }
-
 ## Flux
 resource "kubernetes_manifest" "website_gitRepository" {
   manifest = yamldecode(file("${path.module}/website/flux/gitRepository.yaml"))
@@ -29,12 +23,6 @@ resource "kubernetes_manifest" "website_kustomization" {
 module "api" {
   source = "./api"
 }
-
-# resource "kubernetes_namespace" "api" {
-#     metadata {
-#         name = "api"
-#     }
-# }
 
 ## Flux
 resource "kubernetes_manifest" "api_gitRepository" {
@@ -52,12 +40,6 @@ module "auth" {
   source = "./auth"
 }
 
-# resource "kubernetes_namespace" "auth" {
-#     metadata {
-#         name = "auth"
-#     }
-# }
-
 ## Flux
 resource "kubernetes_manifest" "auth_gitRepository" {
   manifest = yamldecode(file("${path.module}/auth/flux/gitRepository.yaml"))
@@ -73,12 +55,6 @@ resource "kubernetes_manifest" "auth_kustomization" {
 module "profile" {
   source = "./profile"
 }
-
-# resource "kubernetes_namespace" "profile" {
-#     metadata {
-#         name = "profile"
-#     }
-# }
 
 ## Flux
 resource "kubernetes_manifest" "profile_gitRepository" {
