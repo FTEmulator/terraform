@@ -79,10 +79,10 @@ resource "kubernetes_deployment" "postgres" {
                     env {
                         name = "POSTGRES_PASSWORD"
                         value_from {
-                        secret_key_ref {
-                            name = kubernetes_secret.postgres_credentials.metadata[0].name
-                            key  = "password"
-                        }
+                            secret_key_ref {
+                                name = kubernetes_secret.postgres_credentials.metadata[0].name
+                                key  = "password"
+                            }
                         }
                     }
 
