@@ -65,6 +65,26 @@ resource "kubernetes_deployment" "auth" {
                         }
                     }
 
+                    env {
+                        name  = "REDIS_HOST"
+                        value = "redis-service.redis.svc.cluster.local"
+                    }
+
+                    env {
+                        name  = "REDIS_PORT"
+                        value = "6379"
+                    }
+
+                    env {
+                        name = "REDIS_PASSWORD"
+                        value_from {
+                            secret_key_ref {
+                            name = kubernetes_secret.redis_credentials.metadata[0].name
+                            key  = "password"
+                            }
+                        }
+                    }
+
                     volume_mount {
                         mount_path = "/mnt/auth"
                         name = "auth-storage"
