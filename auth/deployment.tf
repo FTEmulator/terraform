@@ -67,7 +67,7 @@ resource "kubernetes_deployment" "auth" {
 
                     env {
                         name  = "REDIS_HOST"
-                        value = "redis-service.redis.svc.cluster.local"
+                        value = "redis-service.auth.svc.cluster.local"
                     }
 
                     env {
