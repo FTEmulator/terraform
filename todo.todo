@@ -2,6 +2,7 @@
 
 ✔ Make variables on all modules @done(25-10-01 11:03)
 ☐ Change postgres password
+☐ Send services via variables to the APIs
 ☐ Create 'Already exists' to Create user
 ☐ Change verifyToken functionality
 ☐ Finis the login integration
