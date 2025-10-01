@@ -39,12 +39,18 @@ resource "kubernetes_deployment" "postgres" {
 
                     env {
                         name  = "POSTGRES_USER"
-                        value = "postgres"
+                        value = var.profile_postgres_user
                     }
 
                     env {
                         name = "POSTGRES_PASSWORD"
-                        value = "Almi123"
+
+                        value_from {
+                            secret_key_ref {
+                            name = kubernetes_secret.postgres_credentials.metadata[0].name
+                            key  = "password"
+                            }
+                        }
                     }
 
                     env {
@@ -127,15 +133,6 @@ resource "kubernetes_config_map" "postgres_init_sql" {
       -- Crear la base de datos si no existe
       SELECT 'CREATE DATABASE profile'
       WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'profile')\gexec
-      
-      -- Crear el usuario si no existe
-      DO $$
-      BEGIN
-        IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'profile_user') THEN
-            CREATE USER profile_user WITH PASSWORD 'Almi123';
-        END IF;
-      END
-      $$;
     EOT
 
     "02-schema.sql" = <<-EOT
@@ -144,11 +141,6 @@ resource "kubernetes_config_map" "postgres_init_sql" {
       
       -- Crear la extensión UUID
       CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-      
-      -- Otorgar permisos al usuario
-      GRANT CONNECT ON DATABASE profile TO profile_user;
-      GRANT USAGE ON SCHEMA public TO profile_user;
-      GRANT CREATE ON SCHEMA public TO profile_user;
       
       -- Crear la tabla users
       CREATE TABLE IF NOT EXISTS users (
@@ -161,13 +153,6 @@ resource "kubernetes_config_map" "postgres_init_sql" {
           photo varchar(100),
           biography varchar(1000)
       );
-      
-      -- Otorgar permisos sobre la tabla
-      ALTER TABLE users OWNER TO profile_user;
-      GRANT ALL PRIVILEGES ON TABLE users TO profile_user;
-      
-      -- Otorgar permisos por defecto
-      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO profile_user;
     EOT
   }
 }

@@ -13,15 +13,3 @@ resource "kubernetes_secret" "postgres_credentials" {
     password = random_password.password.result
   }
 }
-
-resource "kubernetes_secret" "profile_db" {
-  metadata {
-    name      = "profile-db-secret"
-    namespace = kubernetes_namespace.profile.metadata[0].name
-  }
-
-  data = {
-    username = base64encode("profile_user")
-    password = base64encode("Almi123")
-  }
-}
