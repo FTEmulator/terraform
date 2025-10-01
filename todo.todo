@@ -1,9 +1,9 @@
 # Before release 1.0 version
 
 ✔ Make variables on all modules @done(25-10-01 11:03)
-☐ Change postgres password
+✔ Change postgres password @done(25-10-01 12:13)
 ☐ Send services via variables to the APIs
 ☐ Create 'Already exists' to Create user
 ☐ Change verifyToken functionality
-☐ Finis the login integration
+☐ Finish the login integration
 ☐ Search for api bad configs
