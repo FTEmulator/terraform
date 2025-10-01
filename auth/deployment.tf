@@ -67,7 +67,7 @@ resource "kubernetes_deployment" "auth" {
 
                     env {
                         name  = "REDIS_HOST"
-                        value = "redis-service"
+                        value = var.auth_redis_service
                     }
 
                     env {

@@ -56,6 +56,12 @@ variable "auth_redis_image" {
   default     = "redis:7.2.4-alpine"
 }
 
+variable "auth_redis_service" {
+  description = "value for redis service"
+  type        = string
+  default     = "redis-service"
+}
+
 # Job
 variable "auth_job_image" {
   description = "Version de gradle"
