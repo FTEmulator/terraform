@@ -1,5 +1,5 @@
 resource "kubernetes_namespace" "api" {
     metadata {
-        name = "api"
+        name = var.api_namespace
     }
 }

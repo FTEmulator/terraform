@@ -47,32 +47,32 @@ resource "kubernetes_deployment" "auth" {
 
                 container {
                     name = "auth"
-                    image = "eclipse-temurin:21-jdk"
+                    image = var.auth_api_image
                     command = ["java", "-jar", "/mnt/auth/app.jar"]
 
                     port {
-                        container_port = 30002
+                        container_port = var.auth_api_port
                     }
 
                     resources {
                         limits = {
-                            cpu    = "500m"
-                            memory = "512Mi"
+                            cpu    = var.auth_api_cpu
+                            memory = var.auth_api_memory
                         }
                         requests = {
-                            cpu    = "500m"
-                            memory = "512Mi"
+                            cpu    = var.auth_api_cpu
+                            memory = var.auth_api_memory
                         }
                     }
 
                     env {
                         name  = "REDIS_HOST"
-                        value = "redis-service.auth.svc.cluster.local"
+                        value = "redis-service"
                     }
 
                     env {
                         name  = "REDIS_PORT"
-                        value = "6379"
+                        value = var.auth_redis_port
                     }
 
                     env {

@@ -13,12 +13,12 @@ resource "kubernetes_job" "auth-downloader" {
 
                 container {
                     name = "auth-downloader"
-                    image = "gradle:${var.nodeVersion}"
+                    image = var.auth_job_image
                     command = ["sh", "-c"]
                     args = [<<EOF
                         mkdir - p /app /mnt/auth
                         cd /app
-                        git clone ${var.git_repo} .
+                        git clone ${var.auth_git_repo} .
                         chmod +x gradlew
                         ./gradlew bootJar
                         cp -r ./build/libs/*.jar /mnt/auth/app.jar

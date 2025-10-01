@@ -13,7 +13,7 @@ resource "kubernetes_job" "api-downloader" {
 
                 container {
                     name = "api-downloader"
-                    image = "gradle:${var.nodeVersion}"
+                    image = var.api_job_image
                     command = ["sh", "-c"]
                     args = [<<EOF
                         mkdir -p /app /mnt/api

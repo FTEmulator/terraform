@@ -13,12 +13,12 @@ resource "kubernetes_job" "website-downloader" {
 
         container {
           name    = "website-downloader"
-          image   = "node:${var.nodeVersion}"
+          image   = var.job_image
           command = ["sh", "-c"]
           args = [<<EOF
             mkdir -p /app /mnt/website
             cd /app
-            git clone --no-checkout ${var.git_repo} .
+            git clone --no-checkout ${var.website_git_repo} .
             git sparse-checkout init --cone
             git sparse-checkout set out
             git checkout main

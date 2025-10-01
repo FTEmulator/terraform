@@ -23,20 +23,20 @@ resource "kubernetes_deployment" "nginx" {
       spec {
         container {
           name  = "nginx"
-          image = "nginx:${var.nginx_version}"
+          image = var.website_image
 
           port {
-            container_port = 80
+            container_port = var.website_port
           }
 
           resources {
             limits = {
-              cpu    = "200m"
-              memory = "256Mi"
+              cpu    = var.website_cpu
+              memory = var.website_memory
             }
             requests = {
-              cpu    = "100m"
-              memory = "64Mi"
+              cpu    = var.website_cpu
+              memory = var.website_memory
             }
           }
 

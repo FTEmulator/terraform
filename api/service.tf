@@ -9,9 +9,9 @@ resource "kubernetes_service" "api" {
             app = "api"
         }
         port {
-            port = 8080
-            target_port = 8080
-            node_port = var.node_port
+            port = var.api_port
+            target_port = var.api_port
+            node_port = var.api_internal_port
         }
         type = "NodePort"
     }

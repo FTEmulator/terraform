@@ -7,7 +7,7 @@ resource "kubernetes_persistent_volume" "auth_pv" {
 
     spec {
         capacity = {
-            storage = "1Gi"
+            storage = var.auth_api_pv_storage
         }
         access_modes = ["ReadWriteMany"]
         persistent_volume_source {
@@ -32,7 +32,7 @@ resource "kubernetes_persistent_volume_claim" "auth_pvc" {
         access_modes = ["ReadWriteMany"]
         resources {
             requests = {
-                storage = "1Gi"
+                storage = var.auth_api_pv_storage
             }
         }
 

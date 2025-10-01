@@ -43,31 +43,36 @@ resource "kubernetes_deployment" "profile" {
 
                 container {
                     name = "profile"
-                    image = var.deployVersion
+                    image = var.profile_api_image
                     command = ["java", "-jar", "/mnt/profile/app.jar"]
                 
                     port  {
-                        container_port = var.jdk_port
+                        container_port = var.profile_api_port
+                    }
+
+                    env {
+                        name = "DB_URL"
+                        value = var.profile_db_url
                     }
 
                     env {
                         name = "POSTGRES_USER"
-                        value = "profile_user"
+                        value = var.profile_postgres_user
                     }
 
                     env {
                         name = "POSTGRES_PASSWORD"
-                        value = "Almi123"
+                        value = var.profile_postgres_password
                     }
 
                     resources {
                         limits = {
-                            cpu    = "500m"
-                            memory = "512Mi"
+                            cpu    = var.profile_api_cpu
+                            memory = var.profile_api_memory
                         }
                         requests = {
-                            cpu    = "500m"
-                            memory = "512Mi"
+                            cpu    = var.profile_api_cpu
+                            memory = var.profile_api_memory
                         }
                     }
                     volume_mount {
@@ -84,5 +89,8 @@ resource "kubernetes_deployment" "profile" {
                 }
             }
         }
+    }
+    timeouts {
+        create = "5m"
     }
 }

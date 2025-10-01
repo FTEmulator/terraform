@@ -11,8 +11,8 @@ resource "kubernetes_service" "profile" {
         }
 
         port {
-            port = var.jdk_port
-            target_port = var.jdk_port
+            port = var.profile_api_port
+            target_port = var.profile_api_port
         }
 
         type = "ClusterIP"
@@ -32,8 +32,8 @@ resource "kubernetes_service" "postgres" {
         }
 
         port {
-            port = var.postgres_port
-            target_port = var.postgres_port
+            port = var.profile_postgres_port
+            target_port = var.profile_postgres_port
         }
 
         type = "ClusterIP"

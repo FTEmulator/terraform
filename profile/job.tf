@@ -13,12 +13,12 @@ resource "kubernetes_job" "profile-downloader" {
 
                 container {
                     name = "profile-downloader"
-                    image = "gradle:${var.jdkVersion}"
+                    image = var.profile_job_image
                     command = ["sh", "-c"]
                     args = [<<EOF
                         mkdir -p /app /mnt/profile
                         cd /app
-                        git clone ${var.git_repo} .
+                        git clone ${var.profile_git_repo} .
                         chmod +x gradlew
                         ./gradlew bootJar
                         cp -r ./build/libs/*.jar /mnt/profile/app.jar
@@ -49,6 +49,6 @@ resource "kubernetes_job" "profile-downloader" {
     wait_for_completion = true
 
     timeouts {
-        create = "20m"
+        create = "5m"
     }
 }

@@ -5,7 +5,7 @@ resource "kubernetes_persistent_volume" "api_pv" {
     }
     spec {
         capacity = {
-            storage = "1Gi"
+            storage = var.api_pv
         }
         access_modes = ["ReadWriteMany"]
         persistent_volume_source {
@@ -29,7 +29,7 @@ resource "kubernetes_persistent_volume_claim" "api_pvc" {
         access_modes = ["ReadWriteMany"]
         resources {
             requests = {
-                storage = "1Gi"
+                storage = var.api_pv
             }
         }
         volume_name = kubernetes_persistent_volume.api_pv.metadata[0].name

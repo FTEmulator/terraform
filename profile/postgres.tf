@@ -26,7 +26,7 @@ resource "kubernetes_deployment" "postgres" {
             spec {
                 container {
                     name  = "postgres"
-                    image = "postgres:17"
+                    image = var.profile_postgres_image
 
                     port {
                         container_port = 5432
@@ -85,12 +85,12 @@ resource "kubernetes_deployment" "postgres" {
 
                     resources {
                         requests = {
-                            memory = "256Mi"
-                            cpu    = "250m"
+                            memory = var.profile_postgres_memory
+                            cpu    = var.profile_postgres_cpu
                         }
                         limits = {
-                            memory = "512Mi"
-                            cpu    = "500m"
+                            memory = var.profile_postgres_memory
+                            cpu    = var.profile_postgres_cpu
                         }
                     }
                 }

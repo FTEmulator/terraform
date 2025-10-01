@@ -1,5 +1,5 @@
 resource "kubernetes_namespace" "profile" {
     metadata {
-        name = "profile"
+        name = var.profile_namespace
     }
 }

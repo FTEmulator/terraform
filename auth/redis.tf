@@ -102,12 +102,12 @@ resource "kubernetes_deployment" "redis" {
       spec {
         container {
           name  = "redis"
-          image = "redis:7.2.4-alpine"
+          image = var.auth_redis_image
 
           command = ["/bin/sh", "/docker-entrypoint-init/entrypoint.sh"]
 
           port {
-            container_port = 6379
+            container_port = var.auth_redis_port
           }
 
           # Variables de entorno
@@ -124,7 +124,7 @@ resource "kubernetes_deployment" "redis" {
           # Probes
           liveness_probe {
             tcp_socket {
-              port = 6379
+              port = var.auth_redis_port
             }
             initial_delay_seconds = 30
             period_seconds        = 10
@@ -134,7 +134,7 @@ resource "kubernetes_deployment" "redis" {
 
           readiness_probe {
             tcp_socket {
-              port = 6379
+              port = var.auth_redis_port
             }
             initial_delay_seconds = 5
           }

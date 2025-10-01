@@ -44,26 +44,26 @@ resource "kubernetes_deployment" "api" {
                 }
                 container {
                     name = "api"
-                    image = "eclipse-temurin:21-jdk"
+                    image = var.api_image
                     command = ["java", "-jar", "/mnt/api/app.jar"]
                 
                     env {
                         name = "SERVER_PORT"
-                        value = "8080"
+                        value = var.api_port
                     }
 
                     port {
-                        container_port = 8080
+                        container_port = var.api_port
                     }
 
                     resources {
                         limits = {
-                            cpu    = "500m"
-                            memory = "512Mi"
+                            cpu    = var.api_cpu
+                            memory = var.api_memory
                         }
                         requests = {
-                            cpu    = "500m"
-                            memory = "512Mi"
+                            cpu    = var.api_cpu
+                            memory = var.api_memory
                         }
                     }
 

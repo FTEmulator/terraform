@@ -11,8 +11,8 @@ resource "kubernetes_service" "auth" {
         }
 
         port {
-            port = var.node_port
-            target_port = var.node_port
+            port = var.auth_api_port
+            target_port = var.auth_api_port
         }
 
         type = "ClusterIP"
@@ -32,8 +32,8 @@ resource "kubernetes_service" "redis" {
         }
 
         port {
-            port = var.redis_port
-            target_port = var.redis_port
+            port = var.auth_redis_port
+            target_port = var.auth_redis_port
         }
 
         type = "ClusterIP"

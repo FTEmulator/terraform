@@ -1,5 +1,5 @@
 resource "kubernetes_namespace" "auth" {
     metadata {
-        name = "auth"
+        name = var.auth_namespace
     }
 }

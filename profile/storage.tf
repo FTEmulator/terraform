@@ -6,7 +6,7 @@ resource "kubernetes_persistent_volume" "profile_pv" {
 
     spec {
         capacity = {
-            storage = "1Gi"
+            storage = var.profile_api_pv_storage
         }
 
         access_modes = ["ReadWriteMany"]
@@ -29,7 +29,7 @@ resource "kubernetes_persistent_volume" "postgres_pv" {
 
     spec {
         capacity = {
-            storage = "1Gi"
+            storage = var.profile_postgres_pv_storage
         }
 
         access_modes = ["ReadWriteMany"]
@@ -56,7 +56,7 @@ resource "kubernetes_persistent_volume_claim" "profile_pvc" {
         access_modes = ["ReadWriteMany"]
         resources {
             requests = {
-                storage = "1Gi"
+                storage = var.profile_api_pv_storage
             }
         }
 
@@ -75,7 +75,7 @@ resource "kubernetes_persistent_volume_claim" "postgres_pvc" {
         access_modes = ["ReadWriteMany"]
         resources {
             requests = {
-                storage = "1Gi"
+                storage = var.profile_postgres_pv_storage
             }
         }
 

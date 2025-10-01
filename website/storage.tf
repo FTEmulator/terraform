@@ -5,7 +5,7 @@ resource "kubernetes_persistent_volume" "website_pv" {
   }
   spec {
     capacity  = {
-      storage = "1Gi"
+      storage = var.website_pv_storage
     }
     access_modes = ["ReadWriteMany"]
     persistent_volume_source {
@@ -28,7 +28,7 @@ resource "kubernetes_persistent_volume_claim" "website_pvc" {
     access_modes = ["ReadWriteMany"]
     resources {
       requests = {
-        storage = "1Gi"
+        storage = var.website_pv_storage
       }
     }
     volume_name = kubernetes_persistent_volume.website_pv.metadata[0].name

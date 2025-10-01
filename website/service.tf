@@ -9,9 +9,9 @@ resource "kubernetes_service" "nginx" {
       app = "nginx"
     }
     port {
-      port        = 80
-      target_port = 80
-      node_port   = var.node_port
+      port        = var.website_port
+      target_port = var.website_port
+      node_port   = var.website_internal_port
     }
     type = "NodePort"
   }
