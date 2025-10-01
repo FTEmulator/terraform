@@ -69,13 +69,7 @@ variable "profile_postgres_image" {
 variable "profile_postgres_user" {
     description = "Postgres user"
     type        = string
-    default     = "profile_user"
-}
-
-variable "profile_postgres_password" {
-    description = "Postgres password"
-    type        = string
-    default     = "Almi123"
+    default     = "postgres"
 }
 
 variable "profile_postgres_cpu" {
