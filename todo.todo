@@ -7,3 +7,30 @@
 ☐ Change verifyToken functionality
 ☐ Finish the login integration
 ☐ Search for api bad configs
+
+# api rsources
+spring.application.name=ftemulator-api
+
+server.port=30000
+grpc.server.port=50051
+
+# Auth service
+ftemulator.auth.host=auth-service.auth.svc.cluster.local
+ftemulator.auth.port=30002
+
+# Profile service
+ftemulator.profile.host=profile-service.profile.svc.cluster.local
+ftemulator.profile.port=30003
+
+# Development
+## disable KVM
+## sudo rmmod kvm_amd
+## sudo rmmod kvm
+
+# Auth service
+# ftemulator.auth.host=192.168.1.200
+# ftemulator.auth.port=30002
+
+# Profile service
+# ftemulator.profile.host=192.168.1.200
+# ftemulator.profile.port=30003

@@ -49,7 +49,32 @@ resource "kubernetes_deployment" "api" {
                 
                     env {
                         name = "SERVER_PORT"
-                        value = var.api_port
+                        value = var.api_port    
+                    }
+
+                    env {
+                        name = "INTERNAL_PORT"
+                        value = var.api_internal_port
+                    }
+
+                    env {
+                        name = "AUTH_SERVICE_HOST"
+                        value = var.api_auth_service_host
+                    }
+
+                    env {
+                        name = "AUTH_SERVICE_PORT"
+                        value = var.api_auth_service_port
+                    }
+
+                    env {
+                        name = "PROFILE_SERVICE_HOST"
+                        value = var.api_profile_service_host
+                    }
+
+                    env {
+                        name = "PROFILE_SERVICE_PORT"
+                        value = var.api_profile_service_port
                     }
 
                     port {

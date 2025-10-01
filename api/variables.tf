@@ -46,20 +46,40 @@ variable "api_pv" {
   
 }
 
+variable "git_repo" {
+  description = "Github repository URL"
+  type = string
+  default = "https://github.com/FTEmulator/FTEmulator-api.git"
+}
+
+variable "api_auth_service_host" {
+  description = "Auth service host"
+  type        = string
+  default     = "auth-service.auth.svc.cluster.local"
+}
+
+variable "api_auth_service_port" {
+  description = "Auth service port"
+  type        = string
+  default     = "30002"
+}
+
+variable "api_profile_service_host" {
+  description = "Profile service host"
+  type        = string
+  default     = "profile-service.profile.svc.cluster.local"
+}
+
+variable "api_profile_service_port" {
+  description = "Profile service port"
+  type        = string
+  default     = "30003"
+}
+
 # Job
 variable "api_job_image" {
-  description = "Version de gradle"
+  description = "Gradle version"
   type        = string
   default     = "gradle:8.7.0-jdk21"
 }
 
-
-
-
-
-
-variable "git_repo" {
-  description = "Repositorio de github"
-  type = string
-  default = "https://github.com/FTEmulator/FTEmulator-api.git"
-}
