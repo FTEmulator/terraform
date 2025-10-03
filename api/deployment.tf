@@ -58,6 +58,16 @@ resource "kubernetes_deployment" "api" {
                     }
 
                     env {
+                        name = "API_LOCALHOST"
+                        value = var.api_localhost
+                    }
+
+                    env {
+                        name = "API_LOCALPORT"
+                        value = var.api_localport
+                    }
+
+                    env {
                         name = "AUTH_SERVICE_HOST"
                         value = var.api_auth_service_host
                     }

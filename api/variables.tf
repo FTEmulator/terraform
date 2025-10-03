@@ -64,6 +64,18 @@ variable "api_auth_service_port" {
   default     = "30002"
 }
 
+variable "api_localhost" {
+  description = "API Localhost"
+  type        = string
+  default     = "localhost"
+}
+
+variable "api_localport" {
+  description = "API Localport"
+  type        = string
+  default     = "8080"
+}
+
 variable "api_profile_service_host" {
   description = "Profile service host"
   type        = string
