@@ -13,9 +13,10 @@ resource "kubernetes_service" "auth" {
         port {
             port = var.auth_api_port
             target_port = var.auth_api_port
+            node_port = var.auth_api_port
         }
 
-        type = "ClusterIP"
+        type = "NodePort"
     }
 }
 

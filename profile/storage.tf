@@ -18,7 +18,7 @@ resource "kubernetes_persistent_volume" "profile_pv" {
         }
 
         persistent_volume_reclaim_policy = "Delete"
-        storage_class_name = "manual"
+        storage_class_name = "local-path"
     }
 }
 
@@ -41,7 +41,7 @@ resource "kubernetes_persistent_volume" "postgres_pv" {
         }
 
         persistent_volume_reclaim_policy = "Delete"
-        storage_class_name = "manual"
+        storage_class_name = "local-path"
     }
 }
 
@@ -61,7 +61,7 @@ resource "kubernetes_persistent_volume_claim" "profile_pvc" {
         }
 
         volume_name = kubernetes_persistent_volume.profile_pv.metadata[0].name
-        storage_class_name = "manual"
+        storage_class_name = "local-path"
     }
 }
 
@@ -80,6 +80,6 @@ resource "kubernetes_persistent_volume_claim" "postgres_pvc" {
         }
 
         volume_name = kubernetes_persistent_volume.postgres_pv.metadata[0].name
-        storage_class_name = "manual"
+        storage_class_name = "local-path"
     }
 }

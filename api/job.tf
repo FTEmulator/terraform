@@ -16,14 +16,15 @@ resource "kubernetes_job" "api-downloader" {
                     image = var.api_job_image
                     command = ["sh", "-c"]
                     args = [<<EOF
+                        set -ex
                         mkdir -p /app /mnt/api
                         cd /app
                         git clone ${var.git_repo} .
-                        chmod +x gradlew
-                        ./gradlew bootJar
-                        cp -r ./build/libs/*.jar /mnt/api/app.jar
+                        gradle bootJar --no-daemon
+                        ls -lh ./build/libs/
+                        cp -v ./build/libs/*.jar /mnt/api/app.jar
                         chmod +x /mnt/api/app.jar
-                        kubectl -n api rollout restart deployment api
+                        ls -lh /mnt/api/
                         echo "La api se descargo correctamente"
                     EOF
                     ]
@@ -50,6 +51,6 @@ resource "kubernetes_job" "api-downloader" {
     wait_for_completion = true
 
     timeouts {
-        create = "5m"
+        create = "10m"
     }
 }

@@ -16,13 +16,16 @@ resource "kubernetes_job" "auth-downloader" {
                     image = var.auth_job_image
                     command = ["sh", "-c"]
                     args = [<<EOF
-                        mkdir - p /app /mnt/auth
+                        set -ex
+                        mkdir -p /app /mnt/auth
                         cd /app
                         git clone ${var.auth_git_repo} .
-                        chmod +x gradlew
-                        ./gradlew bootJar
-                        cp -r ./build/libs/*.jar /mnt/auth/app.jar
+                        mv .env.prod .env
+                        gradle bootJar --no-daemon
+                        ls -lh ./build/libs/
+                        cp -v ./build/libs/*.jar /mnt/auth/app.jar
                         chmod +x /mnt/auth/app.jar
+                        ls -lh /mnt/auth/
                         echo "La api se descargo correctamente"
                     EOF
                     ]
@@ -49,6 +52,6 @@ resource "kubernetes_job" "auth-downloader" {
     wait_for_completion = true
 
     timeouts {
-        create = "5m"
+        create = "10m"
     }
 }

@@ -65,6 +65,48 @@ resource "kubernetes_deployment" "auth" {
                         }
                     }
 
+                    # Variables con sufijo _PROD (para el .env.prod si lo usa)
+                    env {
+                        name  = "JWT_SECRET_PROD"
+                        value_from {
+                            secret_key_ref {
+                            name = kubernetes_secret.auth_jwt_secret.metadata[0].name
+                            key  = "jwt_secret"
+                            }
+                        }
+                    }
+
+                    env {
+                        name  = "REDIS_HOST_PROD"
+                        value = var.auth_redis_service
+                    }
+
+                    env {
+                        name  = "REDIS_PORT_PROD"
+                        value = tostring(var.auth_redis_port)
+                    }
+
+                    env {
+                        name = "REDIS_PASSWORD_PROD"
+                        value_from {
+                            secret_key_ref {
+                            name = kubernetes_secret.redis_credentials.metadata[0].name
+                            key  = "password"
+                            }
+                        }
+                    }
+
+                    # Variables SIN sufijo (las que realmente usa la aplicación)
+                    env {
+                        name  = "JWT_SECRET"
+                        value_from {
+                            secret_key_ref {
+                            name = kubernetes_secret.auth_jwt_secret.metadata[0].name
+                            key  = "jwt_secret"
+                            }
+                        }
+                    }
+
                     env {
                         name  = "REDIS_HOST"
                         value = var.auth_redis_service
@@ -72,7 +114,7 @@ resource "kubernetes_deployment" "auth" {
 
                     env {
                         name  = "REDIS_PORT"
-                        value = var.auth_redis_port
+                        value = tostring(var.auth_redis_port)
                     }
 
                     env {

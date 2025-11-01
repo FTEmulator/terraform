@@ -16,13 +16,15 @@ resource "kubernetes_job" "profile-downloader" {
                     image = var.profile_job_image
                     command = ["sh", "-c"]
                     args = [<<EOF
+                        set -ex
                         mkdir -p /app /mnt/profile
                         cd /app
                         git clone ${var.profile_git_repo} .
-                        chmod +x gradlew
-                        ./gradlew bootJar
-                        cp -r ./build/libs/*.jar /mnt/profile/app.jar
+                        gradle bootJar --no-daemon
+                        ls -lh ./build/libs/
+                        cp -v ./build/libs/*.jar /mnt/profile/app.jar
                         chmod +x /mnt/profile/app.jar
+                        ls -lh /mnt/profile/
                         echo "La api se descargo correctamente"
                     EOF
                     ]
@@ -49,6 +51,6 @@ resource "kubernetes_job" "profile-downloader" {
     wait_for_completion = true
 
     timeouts {
-        create = "5m"
+        create = "10m"
     }
 }
