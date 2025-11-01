@@ -16,7 +16,7 @@ variable "website_port" {
 variable "website_internal_port" {
   description = "Container port"
   type        = number
-  default     = 31234
+  default     = 80
 }
 
 # Website
