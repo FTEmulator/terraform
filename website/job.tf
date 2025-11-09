@@ -18,14 +18,20 @@ resource "kubernetes_job" "website-downloader" {
           args = [<<EOF
             mkdir -p /app /mnt/website
             cd /app
-            git clone --no-checkout ${var.website_git_repo} .
-            git sparse-checkout init --cone
-            git sparse-checkout set out
+            git clone ${var.website_git_repo} .
             git checkout main
+            mv .env.prod .env
+            npm install
+            npm run build
             cp -r out/* /mnt/website
-            echo "La pagina se descargo correctamente"
+            echo "La pagina se compilo y descargo correctamente"
             EOF
           ]
+
+          env {
+            name  = "NEXT_PUBLIC_API_URL"
+            value = var.api_url
+          }
 
           volume_mount {
             mount_path = "/mnt/website"

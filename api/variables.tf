@@ -14,9 +14,9 @@ variable "api_port" {
 }
 
 variable "api_internal_port" {
-  description = "Api internal port"
+  description = "Api NodePort"
   type        = number
-  default     = 8080
+  default     = 30080
 }
 
 # Api

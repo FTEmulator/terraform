@@ -51,17 +51,17 @@ resource "kubernetes_deployment" "profile" {
                     }
 
                     env {
-                        name = "DB_URL"
+                        name = "SPRING_DATASOURCE_URL"
                         value = var.profile_db_url
                     }
 
                     env {
-                        name = "POSTGRES_USER"
+                        name = "SPRING_DATASOURCE_USERNAME"
                         value = var.profile_postgres_user
                     }
 
                     env {
-                        name = "POSTGRES_PASSWORD"
+                        name = "SPRING_DATASOURCE_PASSWORD"
 
                         value_from {
                             secret_key_ref {
