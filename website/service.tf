@@ -11,8 +11,7 @@ resource "kubernetes_service" "nginx" {
     port {
       port        = var.website_port
       target_port = var.website_port
-      node_port   = var.website_internal_port
     }
-    type = "NodePort"
+    type = "ClusterIP"
   }
 }

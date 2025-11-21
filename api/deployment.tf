@@ -68,22 +68,32 @@ resource "kubernetes_deployment" "api" {
                     }
 
                     env {
-                        name = "AUTH_SERVICE_HOST"
+                        name = "FTEMULATOR_API_HOST"
+                        value = var.api_localhost
+                    }
+
+                    env {
+                        name = "FTEMULATOR_API_PORT"
+                        value = var.api_localport
+                    }
+
+                    env {
+                        name = "FTEMULATOR_AUTH_HOST"
                         value = var.api_auth_service_host
                     }
 
                     env {
-                        name = "AUTH_SERVICE_PORT"
+                        name = "FTEMULATOR_AUTH_PORT"
                         value = var.api_auth_service_port
                     }
 
                     env {
-                        name = "PROFILE_SERVICE_HOST"
+                        name = "FTEMULATOR_PROFILE_HOST"
                         value = var.api_profile_service_host
                     }
 
                     env {
-                        name = "PROFILE_SERVICE_PORT"
+                        name = "FTEMULATOR_PROFILE_PORT"
                         value = var.api_profile_service_port
                     }
 

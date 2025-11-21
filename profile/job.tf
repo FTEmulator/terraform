@@ -20,6 +20,7 @@ resource "kubernetes_job" "profile-downloader" {
                         mkdir -p /app /mnt/profile
                         cd /app
                         git clone ${var.profile_git_repo} .
+                        mv .env.prod .env
                         gradle bootJar --no-daemon
                         ls -lh ./build/libs/
                         cp -v ./build/libs/*.jar /mnt/profile/app.jar

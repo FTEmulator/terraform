@@ -11,8 +11,7 @@ resource "kubernetes_service" "api" {
         port {
             port = var.api_port
             target_port = var.api_port
-            node_port = var.api_internal_port
         }
-        type = "NodePort"
+        type = "ClusterIP"
     }
 }

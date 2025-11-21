@@ -60,5 +60,5 @@ variable "job_image" {
 variable "api_url" {
   description = "URL de la API para NEXT_PUBLIC_API_URL"
   type        = string
-  default = "http://localhost:30080"
+  default = "http://localhost"
 }

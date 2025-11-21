@@ -20,6 +20,7 @@ resource "kubernetes_job" "api-downloader" {
                         mkdir -p /app /mnt/api
                         cd /app
                         git clone ${var.git_repo} .
+                        mv .env.prod .env
                         gradle bootJar --no-daemon
                         ls -lh ./build/libs/
                         cp -v ./build/libs/*.jar /mnt/api/app.jar
