@@ -10,7 +10,7 @@ variable "profile_namespace" {
 variable "profile_api_port" {
     description = "JDK port"
     type        = number
-    default     = 30003
+    default     = 8080
 }
 
 variable "profile_postgres_port" {

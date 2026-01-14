@@ -1,6 +1,10 @@
 resource "random_password" "password" {
   length  = 16
   special = true
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "kubernetes_secret" "postgres_credentials" {

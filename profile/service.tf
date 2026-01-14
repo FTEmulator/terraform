@@ -13,7 +13,7 @@ resource "kubernetes_service" "profile" {
         port {
             port = var.profile_api_port
             target_port = var.profile_api_port
-            node_port = var.profile_api_port
+            node_port = 30003
         }
 
         type = "NodePort"
