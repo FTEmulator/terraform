@@ -10,7 +10,7 @@ resource "kubernetes_ingress_v1" "website" {
 
   spec {
     rule {
-      host = "localhost"
+      host = "website.local"
       http {
         path {
           path      = "/"
