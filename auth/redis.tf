@@ -9,44 +9,9 @@ resource "kubernetes_config_map" "redis_config" {
 
   data = {
     "redis.conf" = <<EOF
-# Data directory
 dir /data
-
-# Persistence
-save 900 1
-save 300 10
-save 60 100
-
-# AOF configuration
-appendonly yes
-appendfsync everysec
-auto-aof-rewrite-percentage 100
-auto-aof-rewrite-min-size 64mb
-
-# Memory management
-maxmemory 512mb
-maxmemory-policy allkeys-lru
-
-# Network configuration
-tcp-keepalive 60
-timeout 300
 bind 0.0.0.0
 port 6379
-
-# Security
-protected-mode no
-
-# Logging
-loglevel notice
-logfile ""
-
-# Session optimization
-hash-max-ziplist-entries 512
-hash-max-ziplist-value 64
-list-max-ziplist-size -2
-set-max-intset-entries 512
-zset-max-ziplist-entries 128
-zset-max-ziplist-value 64
 EOF
   }
 }
