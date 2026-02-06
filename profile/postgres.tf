@@ -34,7 +34,7 @@ resource "kubernetes_deployment" "postgres" {
 
                     env {
                         name  = "POSTGRES_DB"
-                        value = "postgres"
+                        value = "profile"
                     }
 
                     env {
@@ -79,12 +79,6 @@ resource "kubernetes_deployment" "postgres" {
                     }
 
                     volume_mount {
-                        name       = "init-sql"
-                        mount_path = "/docker-entrypoint-initdb.d"
-                        read_only = true
-                    }
-
-                    volume_mount {
                         name       = "postgres-storage"
                         mount_path = "/var/lib/postgresql/data"
                     }
@@ -108,51 +102,8 @@ resource "kubernetes_deployment" "postgres" {
                     }
                 }
 
-                volume {
-                    name = "init-sql"
-                    config_map {
-                        name = kubernetes_config_map.postgres_init_sql.metadata[0].name
-                    }
-                }
-
                 restart_policy = "Always"
             }
         }
     }
-}
-
-# Create a ConfigMap with the initialization SQL
-resource "kubernetes_config_map" "postgres_init_sql" {
-  metadata {
-    name      = "postgres-init-sql"
-    namespace = kubernetes_namespace.profile.metadata[0].name
-  }
-
-  data = {
-    "01-init.sql" = <<-EOT
-      -- Crear la base de datos si no existe
-      SELECT 'CREATE DATABASE profile'
-      WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'profile')\gexec
-    EOT
-
-    "02-schema.sql" = <<-EOT
-      -- Conectarse a la base de datos profile y crear el esquema
-      \connect profile;
-      
-      -- Crear la extensión UUID
-      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-      
-      -- Crear la tabla users
-      CREATE TABLE IF NOT EXISTS users (
-          id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-          name varchar(20) NOT NULL UNIQUE,
-          email varchar(50) NOT NULL UNIQUE,
-          password varchar(100) NOT NULL,
-          country varchar(50) NOT NULL,
-          experience int2,
-          photo varchar(100),
-          biography varchar(1000)
-      );
-    EOT
-  }
 }
